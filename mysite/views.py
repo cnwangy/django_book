@@ -1,27 +1,33 @@
+from django.http import HttpResponse, Http404
+import datetime
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
-import datetime
+# from mysite.books.models import Book
+import time
 
 def hello(request):
     return HttpResponse("Hello world")
 
 
-def home(request):
-    return HttpResponse("This is home")
-
-
 def current_datetime(request):
     current_date = datetime.datetime.now()
-    name = 'wang'
     return render_to_response('current_datetime.html', locals())
 
-def hours_ahead(request,of,mins):
+
+def hours_ahead(request, offset):
     try:
-        hours = int(of)
-        minutes = int(mins)
+        offset = int(offset)
     except ValueError:
         raise Http404()
-    next_time = datetime.datetime.now() + datetime.timedelta(hours=hours,minutes=minutes)
+    # assert False
+
+    next_time = datetime.datetime.now() + datetime.timedelta(hours=offset)
     return render_to_response('hours_ahead.html', locals())
+
+
+
+# def book_list(request):
+#     books = Book.objects.order_by('name')
+#     return render_to_response('book_list.html', {'books': books})
+
