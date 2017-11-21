@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Request Meta{% endblock %}
+
+{% block content %}
+<table>
+    {% for item in values %}
+    <tr>
+        <td>{{ item }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block footer %}
+<p>This is footer.</p>
+{% endblock %}
