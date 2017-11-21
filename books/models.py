@@ -27,7 +27,7 @@ class Author(models.Model):
     email = models.EmailField(blank=True)
 
     def __unicode__(self):
-        return self.name
+        return self.first_name
 
     class Meta:
         ordering = ['last_name']
@@ -40,7 +40,7 @@ class Book(models.Model):
     publication_date = models.DateField()
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     class Meta:
         ordering = ['title']

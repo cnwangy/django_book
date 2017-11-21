@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'books',
 ]
 
@@ -56,7 +57,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(__file__), 'templates/a_temp').replace('\\','/'),],
+        'DIRS': [os.path.join(os.path.dirname(__file__), 'templates/a_temp').replace('\\', '/'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
