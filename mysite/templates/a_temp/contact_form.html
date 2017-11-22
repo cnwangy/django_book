@@ -13,7 +13,7 @@
 
 <form action="" method="post">
     {% for it in form %}
-        <div class="field{% if it.errors %} errors{% endif %}">
+    <div class="field{% if it.errors %} errors{% endif %}">
         {% if it.errors %}
         <ul>
             {% for error in it.errors %}
@@ -21,21 +21,10 @@
             {% endfor %}
         </ul>
         {% endif %}
-        <label for="id_message">Message:</label>
-        {{ form.message }}
+        <label for="{{it.id}}">{{it.name}}:</label>
+        {{ it }}
     </div>
     {% endfor %}
-    <div class="field{% if form.message.errors %} errors{% endif %}">
-        {% if form.message.errors %}
-        <ul>
-            {% for error in form.message.errors %}
-            <li><strong>{{ error }}</strong></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <label for="id_message">Message:</label>
-        {{ form.message }}
-    </div>
     <input type="submit" value="Submit">
 </form>
 </body>
