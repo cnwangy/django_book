@@ -3,7 +3,11 @@ import datetime
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render_to_response
-# from mysite.books.models import Book
+from books.models import Book
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from mysite.forms import ContactForm
+
 import time
 
 def hello(request):
@@ -35,3 +39,19 @@ def display_meta(request):
 #     books = Book.objects.order_by('name')
 #     return render_to_response('book_list.html', {'books': books})
 
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', 'noreply@example.com'),
+                ['siteowner@example.com'],
+            )
+            return HttpResponseRedirect('/contact/thanks/')
+    else:
+        form = ContactForm(initial={'subject': 'I love your site!','message':u'django'})
+    return render_to_response('contact_form.html', {'form': form})

@@ -26,7 +26,9 @@ urlpatterns = [
     url(r'^time/plus/(\d{1,2})/$', hours_ahead),
     url(r'^disp/$', display_meta),
 
-    url(r'^search_form/$', views.search_form),
+    # url(r'^search_form/$', views.search_form),
+    url(r'^search/$', views.search),
+    url(r'^contact/$', contact),
 
     url(r'^admin/', admin.site.urls),
 ]
