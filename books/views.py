@@ -22,6 +22,6 @@ def search(request):
         else:
             books = Book.objects.filter(title__icontains=q)
             return render_to_response('search_results.html',
-                {'books': books, 'query': q})
+                                      {'books': books, 'query': q})
     return render_to_response('search_form.html',
-        {'errors': errors })
+                              {'errors': errors})

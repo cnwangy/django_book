@@ -16,19 +16,30 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from mysite.views import *
-from books import views
+import mysite.views
+import books.views
+import books.models
 
 urlpatterns = [
-    url(r'^$', hello),
-    url(r'^hello/$', hello),
-    url('^time/$', current_datetime),
-    url(r'^time/plus/(\d{1,2})/$', hours_ahead),
-    url(r'^disp/$', display_meta),
+    url(r'^$', mysite.views.hello),
+    url(r'^hello/$', mysite.views.hello),
+    url('^time/$', mysite.views.current_datetime),
+    url(r'^time/plus/(\d{1,2})/$', mysite.views.hours_ahead),
+    url(r'^disp/$', mysite.views.display_meta),
 
-    # url(r'^search_form/$', views.search_form),
-    url(r'^search/$', views.search),
-    url(r'^contact/$', contact),
-
+    url(r'^search/$', books.views.search),
+    url(r'^contact/$', mysite.views.contact),
+    url(r'^contact/thanks/$', mysite.views.thanks),
     url(r'^admin/', admin.site.urls),
+
+    url(r'^mydata/birthday/$', mysite.views.sell, {'item': 'jan', 'price': 6, 'quantity': 21}),
+    url(r'^mydata/(?P<item>\w+)/(?P<price>\d+)/(?P<quantity>\d+)/$', mysite.views.sell),
+
+    url(r'^events/$', mysite.views.object_list, {'model': books.models.Author}),
+    url(r'^blog/entries/$', mysite.views.object_list, {'model': books.models.Book}),
+    url(r'^temps/$', mysite.views.object_list, {'model': books.models.Author, 'template_name': 'temps_list.html'}),
+    url(r'^articles/(\d{4})/(\d{1,2})/(\d{1,2})/$', mysite.views.day_archive),
+    url(r'^search/somepage$', mysite.views.method_splitter,
+        {'GET': mysite.views.some_page_get, 'POST': mysite.views.some_page_post}),
+
 ]

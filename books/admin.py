@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from books.models import Publisher, Author, Book
+
+
 # Register your models here.
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -17,6 +19,7 @@ class BookAdmin(admin.ModelAdmin):
     ordering = ('-publication_date',)
     filter_horizontal = ('authors',)
     raw_id_fields = ('publisher',)
+
 
 admin.site.register(Publisher)
 admin.site.register(Author, AuthorAdmin)
